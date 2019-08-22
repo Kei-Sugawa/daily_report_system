@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
 
         Employee e = null;
 
-        if(code != null && !code.equals("") && !plain_pass.equals("")) {
+        if(code != null && !code.equals("") && plain_pass != null && !plain_pass.equals("")) {
             EntityManager em = DBUtil.createEntityManager();
 
             String password = EncryptUtil.getPasswordEncrypt(
@@ -91,6 +91,7 @@ public class LoginServlet extends HttpServlet {
 
             RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/login/login.jsp");
             rd.forward(request, response);
+
         } else {
             //認証できたらログイン状態にしてトップページへリダイレクト
             request.getSession().setAttribute("login_employee", e);
