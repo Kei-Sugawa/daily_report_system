@@ -12,6 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
+
 @Table(name = "checks")
 @NamedQueries ({
     @NamedQuery(
@@ -23,11 +24,15 @@ import javax.persistence.Table;
             query = "SELECT COUNT(c) FROM Check AS c WHERE c.report = :report"
             ),
     @NamedQuery(
-            name = "getAllEmployeesChecks",
+            name = "getMyCheckOnReport",
+            query = "SELECT c FROM Check AS c WHERE c.report = :report AND c.employee = :employee ORDER BY c.id DESC "
+            ),
+    @NamedQuery(
+            name = "getMyChecks",
             query = "SELECT c FROM Check AS c WHERE c.employee = :employee ORDER BY c.id DESC "
             ),
     @NamedQuery(
-            name = "getEmployeesChecksCount",
+            name = "getMyChecksCount",
             query = "SELECT COUNT(c) FROM Check AS c WHERE c.employee = :employee"
             )
 
@@ -41,7 +46,7 @@ public class Check {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
-    private Employee employee ;
+    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "report_id", nullable = false)

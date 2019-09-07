@@ -32,6 +32,12 @@
                             <th>更新日時</th>
                             <td><fmt:formatDate value="${report.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         </tr>
+                        <tr>
+                            <th>チェック</th>
+                            <td>
+                                <c:import url="check.jsp" />
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
